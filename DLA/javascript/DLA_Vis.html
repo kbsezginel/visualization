@@ -1,0 +1,107 @@
+<html>
+<head>
+  <title>DLA Vis</title>
+</head>
+
+<body>
+  <!--<script src="Source/three.js"></script>             Load Three.js -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r76/three.js"></script>
+  <script src="Source/OrbitControls.js"></script>      <!-- Load mouse controls -->
+  <script src="Source/VisF.js"></script>
+  <script src="coordinates.js"></script>
+
+  <input style="position: absolute;left:-9999px;" type="radio" name="Pause" id="Play" />
+	<label for="Play">
+	<img src="Source/play-48.png" style="display:inline-block; position:absolute; left:0px;top:0px; cursor:pointer; padding:0px;"/></label>
+
+  <input style="position: absolute;left:-9999px;" type="radio" name="Pause" id="Pause" />
+	<label for="Pause">
+	<img src="Source/pause-48.png" style="display:inline-block; position:absolute; left:40px;top:0px; cursor:pointer; padding:0px;"/></label>
+
+  <input style="position: absolute; top:15px; left: 127px" type="range" name="fps" id="speed" value="5" min="0.1" max="120" />
+
+  <script>
+    // Define global variables
+    // ---------------------------------- ANIMATION VARIABLES ---------------------------------------------
+    var camera, renderer, scene, controls;
+    var fps = 24;                  // Frame per second (controlled by slider)
+    var objectNumber;             // Num of objects in the scene before adding any molecules
+    var visIndex;                 // Atom Index for radius and color value from the atomVisData.js file
+    scene = new THREE.Scene();    // Initialize Scene
+    renderer = new THREE.WebGLRenderer();   // Initialize renderer
+    var zoomAmount = 30;                    // Camera zoom amount
+    var ballRadius = 0.5;
+    var ballColor = red_color;
+    var animIndex = 0;
+    var ballIndex = 0;
+    var center = [0, 0, 0];
+// --------------------------------------------------------------------------------------------------------
+    function initialize() {
+      var WIDTH; 			// browser window WIDTH
+      var HEIGHT; 		// browser window HEIGHT
+
+      WIDTH = window.innerWidth;
+      HEIGHT = window.innerHeight;
+
+      renderer.setSize(WIDTH,HEIGHT);
+      renderer.setClearColor(0xFFFFFF); // 0xFFFFFF corresponds to white
+      document.body.appendChild(renderer.domElement);
+
+      camera = new THREE.PerspectiveCamera(zoomAmount*1.5, WIDTH / HEIGHT, 0.1, 20000);
+      camera.position.set(0, 0, 90);
+      scene.add(camera);
+
+      var light = new THREE.PointLight(0xFFFFFF); // white light
+      light.position.set(-100, 100, 300);
+      scene.add(light);
+
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+      // Add axis lines for x, y, z
+      var axisLength = 30;
+      addLine([axisLength, 0, 0], [-axisLength, 0, 0], red);    // x-axis
+      addLine([0, axisLength, 0], [0, -axisLength, 0], green);  // y-axis
+      addLine([0, 0, axisLength], [0, 0, -axisLength], blue);   // z-axis
+
+      // Visualize all the atoms in the original structure
+      objectNumber = scene.children.length-1;
+      addBall([0, 0, 0], ballRadius, ballColor);
+    };
+// --------------------------------------------------------------------------------------------------------
+    function animate() {
+    	// Reads the input speed from the slider
+    	fps = document.getElementById("speed").value;
+    	// Sets the animation frame per second
+      setTimeout( function() { requestAnimationFrame( animate ); }, 1000 / fps );
+      renderer.render(scene, camera);
+      controls.update();
+
+      if(document.getElementById('Play').checked) {
+        // ANIMATION HERE
+        // ballIndex = animIndex
+        x = coordinates[animIndex][0];
+        y = coordinates[animIndex][1];
+        dist = Math.sqrt(Math.pow(x - center[0], 2) + Math.pow(y - center[1], 2));
+        ballColor[1] = dist  * 10;
+        ballColor[2] = dist  * 35;
+        addBall(coordinates[animIndex], ballRadius, ballColor);
+        animIndex++;
+      } else{
+        animIndex = 0;
+        for (var i = 0; i < scene.children.length; i++) {
+          if (i > objectNumber) {
+            scene.remove(scene.children[i]);
+          };
+        };
+      };
+    };
+
+    initialize();
+
+    animate();
+
+  </script>
+
+</body>
+</html>

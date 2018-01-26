@@ -1,6 +1,8 @@
-# Visualization Tutorials and Examples
+Visualization Tutorials and Examples
+====================================
 
-## Scientific Communication
+Scientific Communication
+------------------------
 
 ### Matplotlib Plotting Examples
 
@@ -18,7 +20,8 @@ Matplotlib animations require [ffmpeg](https://ffmpeg.org/). See below for insta
 - [Rain animation](https://github.com/kbsezginel/visualization/blob/master/matplotlib-animations/RainAnimation.ipynb)
 - [Snake game in a jupyter notebook](https://github.com/kbsezginel/visualization/blob/master/matplotlib-animations/iPython-Snake-master/SnakeGame.ipynb)
 
-## Molecular visualization
+Molecular visualization
+-----------------------
 
 ### Three.js
 
@@ -30,14 +33,16 @@ is an example to visualize molecules using this library in a browser.
 
 Example scripts and sources for molecular visualization and movie generation in VMD.
 
-## Audio visualization
+Audio visualization
+-------------------
 
 ### Audio visualization in Blender
 
 - [Blender 3D Circular Audio Visualizer Tutorial by AnonXmous](https://www.youtube.com/watch?v=8NTvv_Y6zr0)
 - [GXAudioVisualisation GitHub Repository](https://github.com/gethiox/GXAudioVisualisation)
 
-## Installation
+Installation
+------------
 
 ### ffmpeg
 

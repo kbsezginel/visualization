@@ -17,20 +17,12 @@
         <h1>{{ site.title | default: site.github.repository_name }}</h1>
         <p>{{ site.description | default: site.github.project_tagline }}</p>
 
-          <a href="http://kbsezginel.github.io">KBS - Home</a>
+          <a href="http://kbsezginel.github.io"><strong>- </strong>KBS - Home</a>
           <br>
-          <a href="http://kbsezginel.github.io/visualization">Visualization</a>
+          <a href="{{ '/' | relative_url }}"><strong>- </strong>Visualization</a>
           <br>
-          <a href="http://kbsezginel.github.io/visualization/vmd">VMD</a>
-          <br>
-
-        {% if site.github.is_project_page %}
-          <p class="view"><a href="{{ site.github.repository_url }}">View the Project on GitHub <small>{{ github_name }}</small></a></p>
-        {% endif %}
-
-        {% if site.github.is_user_page %}
-          <p class="view"><a href="{{ site.github.owner_url }}">View My GitHub Profile</a></p>
-        {% endif %}
+          <a href="{{ '/vmd' | relative_url }}"><strong>- </strong>VMD</a>
+          <br> <br>
 
         {% if site.show_downloads %}
           <ul>

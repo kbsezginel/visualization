@@ -29,7 +29,7 @@ Molecular visualization
 animated 3D computer graphics in a web browser. [Here](https://github.com/kbsezginel/visualization/tree/master/three-js/atomVis)
 is an example to visualize molecules using this library in a browser.
 
-### [VMD](https://kbsezginel.github.io/visualization/vmd)
+### [VMD](/vmd)
 
 Example scripts and sources for molecular visualization and movie generation in VMD.
 

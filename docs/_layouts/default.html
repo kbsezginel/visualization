@@ -17,12 +17,11 @@
         <h1>{{ site.title | default: site.github.repository_name }}</h1>
         <p>{{ site.description | default: site.github.project_tagline }}</p>
 
-          <a href="http://kbsezginel.github.io"><strong>- </strong>KBS - Home</a>
-          <br>
-          <a href="{{ '/' | relative_url }}"><strong>- </strong>Visualization</a>
-          <br>
-          <a href="{{ '/vmd' | relative_url }}"><strong>- </strong>VMD</a>
-          <br> <br>
+          <table>
+            {% for nav in site.navigation %}
+              <tr><th><a href="{{ nav.url }}">{{ nav.title }}</a></th></tr>
+            {% endfor %}
+          </table>
 
         {% if site.show_downloads %}
           <ul>

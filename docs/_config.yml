@@ -2,3 +2,10 @@ theme: jekyll-theme-minimal
 title: Visualization
 description: Tutorials and scripts for scientific visualization
 show_downloads: True
+navigation:
+  - title: KBS - Home
+    url: http://kbsezginel.github.io
+  - title: Visualization
+    url: /
+  - title: VMD
+    url: vmd

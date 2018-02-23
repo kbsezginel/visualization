@@ -1,18 +1,21 @@
 # Visualization Tools
 
 ## Matplotlib Plotting Examples
-- [2D Histogram](https://github.com/kbsezginel/visualization/blob/master/matplotlib-plots/2D%20Histogram.ipynb)
-- [3D Scatter Plot](https://github.com/kbsezginel/visualization/blob/master/matplotlib-plots/3D%20Scatter.ipynb)
-- [Non-linear axes](https://github.com/kbsezginel/visualization/blob/master/matplotlib-plots/Nonlinear%20Axis.ipynb)
-- [Particle in a box](https://github.com/kbsezginel/visualization/blob/master/matplotlib-plots/Particle%20in%20a%20box.ipynb)
-- [Regression with numpy](https://github.com/kbsezginel/visualization/blob/master/matplotlib-plots/Regression.ipynb)
-- [iPython Widgets](https://github.com/kbsezginel/visualization/blob/master/matplotlib-plots/Widget-Gridsize.ipynb)
 
-## Matplotlib Animations
+-   [2D Histogram](https://github.com/kbsezginel/visualization/blob/master/matplotlib-plots/2D_histogram.ipynb)
+-   [3D Scatter Plot](https://github.com/kbsezginel/visualization/blob/master/matplotlib-plots/3D_scatter.ipynb)
+-   [Non-linear axes](https://github.com/kbsezginel/visualization/blob/master/matplotlib-plots/nonlinear_axis.ipynb)
+-   [Regression with numpy](https://github.com/kbsezginel/visualization/blob/master/matplotlib-plots/regression.ipynb)
+-   [iPython Widgets](https://github.com/kbsezginel/visualization/blob/master/matplotlib-plots/interactive_widgets_DLA.ipynb)
+
+### Matplotlib Animations
+
 Matplotlib animations require [ffmpeg](https://ffmpeg.org/). See below for installation instructions.
-- [Sin wave animation](https://github.com/kbsezginel/visualization/blob/master/matplotlib-animations/Anim_sin-wave.ipynb)
-- [Rain animation](https://github.com/kbsezginel/visualization/blob/master/matplotlib-animations/RainAnimation.ipynb)
-- [Snake game in a jupyter notebook](https://github.com/kbsezginel/visualization/blob/master/matplotlib-animations/iPython-Snake-master/SnakeGame.ipynb)
+-   [Sin wave animation](https://github.com/kbsezginel/visualization/blob/master/matplotlib-animations/sin_wave_animation.ipynb)
+-   [Rain animation](https://github.com/kbsezginel/visualization/blob/master/matplotlib-animations/rain_animation.ipynb)
+-   [Particles in a box](https://github.com/kbsezginel/visualization/blob/master/matplotlib-animations/particles_in_a_box.ipynb)
+-   [Scatter animations](https://github.com/kbsezginel/visualization/blob/master/matplotlib-animations/scatter_animations.ipynb)
+-   [Snake game in a jupyter notebook](https://github.com/kbsezginel/visualization/blob/master/matplotlib-animations/iPython-Snake-master/SnakeGame.ipynb)
 
 ## Three.js
 [Three.js](https://threejs.org/) is a cross-browser JavaScript library/API used to create and display

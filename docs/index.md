@@ -21,6 +21,10 @@ Matplotlib animations require [ffmpeg](https://ffmpeg.org/). See below for insta
 -   [Scatter animations](https://github.com/kbsezginel/visualization/blob/master/matplotlib-animations/scatter_animations.ipynb)
 -   [Snake game in a jupyter notebook](https://github.com/kbsezginel/visualization/blob/master/matplotlib-animations/iPython-Snake-master/SnakeGame.ipynb)
 
+More matplotlib examples:
+-   [Scipy matplotlib lecture](http://www.scipy-lectures.org/intro/matplotlib/matplotlib.html)
+-   [Matplotlib official examples](http://matplotlib.org/examples/index.html)
+
 Molecular visualization
 -----------------------
 

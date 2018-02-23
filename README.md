@@ -17,6 +17,10 @@ Matplotlib animations require [ffmpeg](https://ffmpeg.org/). See below for insta
 -   [Scatter animations](https://github.com/kbsezginel/visualization/blob/master/matplotlib-animations/scatter_animations.ipynb)
 -   [Snake game in a jupyter notebook](https://github.com/kbsezginel/visualization/blob/master/matplotlib-animations/iPython-Snake-master/SnakeGame.ipynb)
 
+More matplotlib examples:
+-   [Scipy matplotlib lecture](http://www.scipy-lectures.org/intro/matplotlib/matplotlib.html)
+-   [Matplotlib official examples](http://matplotlib.org/examples/index.html)
+
 ## Three.js
 [Three.js](https://threejs.org/) is a cross-browser JavaScript library/API used to create and display
 animated 3D computer graphics in a web browser. [Here](https://github.com/kbsezginel/visualization/tree/master/three-js/atomVis)

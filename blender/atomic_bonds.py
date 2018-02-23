@@ -3,7 +3,7 @@ import numpy as np
 
 def morse_potential(dist, depth, width, eq_dist):
     """ Morse potential as implemented in LAMMPS. """
-    return (depth * np.power((1 - np.exp(-width*(dist - eq_dist))), 2))
+    return (depth * np.power((1 - np.exp(-width * (dist - eq_dist))), 2))
 
 
 def harmonic_potential(dist, k, eq_dist):

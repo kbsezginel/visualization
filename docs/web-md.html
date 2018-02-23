@@ -1,0 +1,299 @@
+<html>
+<head>
+  <title>MD Simulation Tutorial</title>
+</head>
+
+<body>
+  <strong>Atom Color:</strong>
+  <!--- Colorpicker -->
+  <script type="text/javascript" src="web-md/jquery-1.9.1.js"></script>
+  <script type="text/javascript" src="web-md/spectrum.js"></script>
+  <!-- Sources for animation and other functions -->
+  <script src="web-md/three.min.js"></script>
+  <script src="web-md/OrbitControls.js"></script>
+  <script src="web-md/MDfuns.js"></script>
+  <link rel='stylesheet' href='web-md/spectrum.css' />
+  <input type='text' id="full" />
+  <script type="text/javascript">
+    $("#full").spectrum({
+    color: "#f00"
+    });
+  </script>
+
+  <!-- Radio buttons for Thermostat and Epsilon -->
+  <strong>Thermostat:</strong>
+    <input type="radio" name="Vrs" id="Vrs_Off" value="On" />Off
+    <input type="radio" name="Vrs" id="Vrs_VS" value="On" checked="" />On
+    <!-- <input type="radio" name="Vrs" id="Vrs_Ber" value="Off" />Ber --> -
+  <strong>Attraction Strength:</strong>
+    <input type="radio" name="Epsilon" id="E_Strong" value="Strong" />Strong
+    <input type="radio" name="Epsilon" id="E_Medium" value="Medium" checked="" />Medium
+    <input type="radio" name="Epsilon" id="E_Weak" value="Weak" />Weak -
+  <strong>Time Step:</strong>
+    <input type="radio" name="TimeStep" id="dt_small" value="Small" />Small
+    <input type="radio" name="TimeStep" id="dt_medium" value="Medium" checked="" />Medium
+    <input type="radio" name="TimeStep" id="dt_large" value="Large" />Large -
+  <strong>Atom Radius:</strong>
+    <input type="radio" name="Radius" id="sig_small" value="Small" />Small
+    <input type="radio" name="Radius" id="sig_medium" value="Medium" checked="" />Medium
+    <input type="radio" name="Radius" id="sig_large" value="Large" />Large
+
+
+  <!-- Print out temperature and kinetic energy -->
+  <div class="Ekin"></div>
+  <div class="Tkin"></div>
+  <div class="info"></div>
+
+  <script>
+    // Global variables
+    var initVscale = 0.1;
+    var Temp = 298; var Tempi;
+    var Ekin = 0; var mAtom = 40; // to scale Ekin and temperature arbitrary mass
+    var Vsf;
+    var eps = 1.65; var sig = 3.4;
+    var dt = 0.005;
+    var tao = 0.01; //Thermostat coupling constant
+    var tempAtom;
+
+    var camera, renderer, scene, controls;
+    var atoms = [];
+    var numAtoms = 20;
+    var unitCellSizeX = 20;
+    var unitCellSizeY = 20;
+    var unitCellSizeZ = 20; // units are assumed to be angstroms
+    var atomVelocities = [];
+
+    function initialize() {
+
+      // -------------------------------- ANIMATION INITIALIZATION ------------------------------------
+
+        scene = new THREE.Scene();
+        renderer = new THREE.WebGLRenderer();
+
+        var WIDTH; //browser window WIDTH
+        var HEIGHT; //browser window HEIGHT
+
+        WIDTH = window.innerWidth;
+        HEIGHT = window.innerHeight*0.75; // Make the box smaller by 75 %
+
+        renderer.setSize(WIDTH,HEIGHT);
+        renderer.setClearColorHex(0xFFFFFF); // oxFFFFFF corresponds to white
+        document.body.appendChild(renderer.domElement);
+
+        camera = new THREE.PerspectiveCamera(55, WIDTH / HEIGHT, 0.1, 20000); // first one is zoom
+        camera.position.set(0,30,0);
+        scene.add(camera);
+
+        var light = new THREE.PointLight(0xFFFFFF); // white light
+        light.position.set(-100, 200, 100);
+        scene.add(light);
+
+       var sphereShape = new THREE.SphereGeometry(1,16,16);
+       var sphereMaterial = new THREE.MeshLambertMaterial({color:0x3161B5}); // blue
+      // ----------------------------------- MD INITIALIZATION --------------------------------------
+
+      // Initialize random positions
+       for (var i = 1; i <= numAtoms; i++) {
+         tempAtom = new THREE.Mesh(sphereShape,sphereMaterial);
+         tempAtom.position.x = (Math.random()-0.5)*unitCellSizeX;
+         tempAtom.position.y = (Math.random()-0.5)*unitCellSizeY;
+         tempAtom.position.z = (Math.random()-0.5)*unitCellSizeZ;
+         atoms.push(tempAtom);
+         scene.add(tempAtom);
+       }
+
+       // Initialize center of mass velocities
+       var cmvx = 0; var cmvy = 0; var cmvz = 0;
+       var vx = []; var vy = []; var vz = [];
+
+       // Set initial random velocities between initVscale * (-0.5 to 0.5)
+      for (var i = 1; i <= numAtoms; i++) {
+         vx[i] = initVscale*(normDist(0, 0.5, -0.5, 0.5));
+         vy[i] = initVscale*(normDist(0, 0.5, -0.5, 0.5));
+         vz[i] = initVscale*(normDist(0, 0.5, -0.5, 0.5));
+         // Calculate center of mass velocities for each dimension
+         cmvx += vx[i];
+         cmvy += vy[i];
+         cmvz += vz[i];
+      }
+
+      for (var i = 1; i <= numAtoms; i++) {
+        vx[i] -= cmvx/numAtoms;
+        vy[i] -= cmvy/numAtoms;
+        vz[i] -= cmvz/numAtoms;
+        Ekin += 0.5 * (Math.pow(vx[i],2) + Math.pow(vy[i],2) + Math.pow(vz[i],2)) * mAtom;
+        //atomVelocities.push([vx[i],vy[i],vz[i]]);
+      }
+
+      Tempi = Ekin / numAtoms * 2 / 3;
+      Vsf = Math.sqrt(Temp/Tempi);
+      Ekin = 0;
+
+      for (var i = 1; i <= numAtoms; i++) {
+        vx[i] *= Vsf;
+        vy[i] *= Vsf;
+        vz[i] *= Vsf;
+        Ekin += 0.5 * (Math.pow(vx[i],2) + Math.pow(vy[i],2) + Math.pow(vz[i],2)) * mAtom;
+       atomVelocities.push([vx[i],vy[i],vz[i]]);
+      }
+
+       var unitCellBoundaries = new THREE.BoxHelper();
+       unitCellBoundaries.material.color.setRGB(0, 0, 0);
+       unitCellBoundaries.scale.set(10, 10, 10);
+       scene.add(unitCellBoundaries);
+
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+    }
+
+    function animate() {
+
+      // Update color based on colorpicker
+      colorPicked = $("#full").spectrum("get").toHexString(); // Get selected color in Hex
+      var kolor = "0x" + colorPicked.substring(1); // Convert Hex format for three.js
+      tempAtom.material.color.setHex(kolor); // Change color of spheres
+
+              // Update epsilon according to selection
+              if(document.getElementById('E_Strong').checked) {
+              eps = 16500; // kg*A^2/s^2
+              }
+              if(document.getElementById('E_Medium').checked) {
+              eps = 16.5; // kg*A^2/s^2
+              }
+              if(document.getElementById('E_Weak').checked) {
+              eps = 0.000165; // kg*A^2/s^2
+              }
+
+              // Update time step according to selection
+              if(document.getElementById('dt_small').checked) {
+              dt = 0.001; // kg*A^2/s^2
+              }
+              if(document.getElementById('dt_medium').checked) {
+              dt = dt; // kg*A^2/s^2
+              }
+              if(document.getElementById('dt_large').checked) {
+              dt = 0.05; // kg*A^2/s^2
+              }
+
+              // Update size of atoms according to selection
+              if(document.getElementById('sig_small').checked) {
+              sig = 0.3; // kg*A^2/s^2
+              for (var i = 1; i <= numAtoms; i++) {
+              atoms[i-1].scale.set(0.5,0.5,0.5);
+                }
+              }
+              if(document.getElementById('sig_medium').checked) {
+              sig = 3.4; // kg*A^2/s^2
+              for (var i = 1; i <= numAtoms; i++) {
+              atoms[i-1].scale.set(1,1,1);
+                }
+              }
+              if(document.getElementById('sig_large').checked) {
+              sig = 10; // kg*A^2/s^2
+              for (var i = 1; i <= numAtoms; i++) {
+              atoms[i-1].scale.set(2,2,2);
+                }
+              }
+
+      requestAnimationFrame(animate);
+
+        // --------------------- MD -----------------------------
+        for (var i = 1; i <= numAtoms; i++) {
+          var a = atoms[i-1];
+
+          // initial velocity before applying forces
+          var vx = atomVelocities[i-1][0];
+          var vy = atomVelocities[i-1][1];
+          var vz = atomVelocities[i-1][2];
+
+          var netFx = 0; var netFy = 0; var netFz = 0;
+
+          //calculate forces acting on this atom
+          for (var j = 1; j <= numAtoms; j++) {
+            if(i != j) {
+              var dx = a.position.x - atoms[j-1].position.x;
+              var dy = a.position.y - atoms[j-1].position.y;
+              var dz = a.position.z - atoms[j-1].position.z;
+
+
+
+              netFx += forces(dx,dy,dz,"x");
+              netFy += forces(dx,dy,dz,"y");
+              netFz += forces(dx,dy,dz,"z");
+            }
+          }
+
+          // V(t+dt) = V(t) + 0.5*a(t)*dt where [a(t) = F(t) / m]
+          atomVelocities[i-1][0] += 0.5 * dt * netFx / mAtom;
+          atomVelocities[i-1][1] += 0.5 * dt * netFy / mAtom;
+          atomVelocities[i-1][2] += 0.5 * dt * netFz / mAtom;
+
+          // r(t+dt) = r(t) + V(t+dt) * dt
+          a.position.x += atomVelocities[i-1][0] * dt;
+          a.position.y += atomVelocities[i-1][1] * dt;
+          a.position.z += atomVelocities[i-1][2] * dt;
+
+          vx = atomVelocities[i-1][0];
+          vy = atomVelocities[i-1][1];
+          vz = atomVelocities[i-1][2];
+
+          // Calculate kinetic energy using m*V^2/2
+          Ekin += 0.5 * (Math.pow(vx,2) + Math.pow(vy,2) + Math.pow(vz,2)) * mAtom;
+          var EkinR = Math.round(Ekin*1000)/1000; // Round to 3 decimals
+
+
+          // now we apply periodic boundary conditions
+          a.position.x = pbc(a.position.x,unitCellSizeX);
+          a.position.y = pbc(a.position.y,unitCellSizeY);
+          a.position.z = pbc(a.position.z,unitCellSizeZ);
+
+        }
+
+        // Calculate temperature from kinetic energy
+        var Tkin = 2 * Ekin / numAtoms / 3;
+        var TkinR = Math.round(Tkin*1000)/1000; var TempiR = Math.round(Tempi*1000)/1000; var VR = Math.round(atomVelocities[1][0]*1000)/1000;
+        var netFxR = Math.round(netFx*1000)/1000; var dxR = Math.round(dx*1000)/1000;
+        document.querySelector('.Ekin').innerHTML = "E(kin): " + EkinR;
+        document.querySelector('.Tkin').innerHTML = "Temp: " + TkinR + "  Temp(i): " + TempiR + "  V: " + VR;
+        document.querySelector('.info').innerHTML = "netFx: " + netFxR + "  dx: " + dxR;
+        Ekin = 0;
+
+        // Velocity Rescaling
+        if(document.getElementById('Vrs_VS').checked) {
+        var Tsf = Math.sqrt(Temp/Tkin);
+        for (var i = 1; i <= numAtoms; i++) {
+          atomVelocities[i-1][0] *= Tsf;
+          atomVelocities[i-1][1] *= Tsf;
+          atomVelocities[i-1][2] *= Tsf;
+        }
+        Ekin = 0;
+        }
+
+        /* ANOTHER THERMOSTAT NOT USED
+        if(document.getElementById('Vrs_Ber').checked) {
+        var Bsf = Math.sqrt(1+dt/tao*(Temp/Tkin-1));
+        for (var i = 1; i <= numAtoms; i++) {
+          atomVelocities[i-1][0] *= Bsf;
+          atomVelocities[i-1][1] *= Bsf;
+          atomVelocities[i-1][2] *= Bsf;
+        }
+        Ekin = 0;
+      }
+      */
+
+      else {}
+
+        renderer.render(scene, camera);
+        controls.update();
+
+
+    }
+
+    initialize();
+    animate();
+
+    // window.alert("everything is okay");
+
+  </script>
+
+</body>
+</html>

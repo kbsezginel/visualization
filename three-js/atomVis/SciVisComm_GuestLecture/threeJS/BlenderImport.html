@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<title>Blender Import</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+		<script src="three.js"></script>
+    <script>
+
+        var scene, camera, renderer;
+        var geometry, material, mesh;
+        var loader = new THREE.JSONLoader();
+				var model;
+
+        init();
+        animate();
+
+        function init() {
+
+            scene = new THREE.Scene();
+
+            camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+            camera.position.z = 100;
+
+						// To run local host use: 'python -m http.server'
+						// Use this adress on Chrome: http://localhost:8000/Desktop/threeJS/BlenderImport.html
+						loader.load('http://localhost:8000/Desktop/threeJS/-----.json', addModel);
+
+						function addModel(geometry, materials){
+							var material = new THREE.MeshFaceMaterial( materials );
+							model = new THREE.Mesh( geometry, material );
+							model.scale.set(10,10,10);
+							model.position.set(0,0,0);
+							scene.add(model);
+						}
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+
+            document.body.appendChild( renderer.domElement );
+
+        }
+
+        function animate() {
+
+            requestAnimationFrame( animate );
+
+            model.rotation.x += 0.01;
+            model.rotation.y += 0.02;
+
+            renderer.render( scene, camera );
+
+        }
+
+    </script>
+	</body>
+</html>

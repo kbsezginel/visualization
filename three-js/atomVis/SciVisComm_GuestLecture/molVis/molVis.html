@@ -1,0 +1,83 @@
+<html>
+<head>
+  <title>atomVis</title>
+  <style>
+    body { margin: 0; }
+    canvas { width: 100%; height: 100% }
+  </style>
+</head>
+
+<body>
+  <script src="Source/three.js"></script>              <!-- Load Three.js -->
+  <script src="Source/OrbitControls.js"></script>      <!-- Load mouse controls -->
+  <script src="Source/atomVisData.js"></script>
+  <script src="Molecules/TNT.js"></script>
+
+  <input style="position: absolute;left:-9999px;" type="radio" name="Pause" id="Play" />
+	<label for="Play">
+	<img src="Source/play-48.png" style="display:inline-block; position:absolute; left:0px;top:0px; cursor:pointer; padding:0px;"/></label>
+
+  <input style="position: absolute;left:-9999px;" type="radio" name="Pause" id="Pause" />
+	<label for="Pause">
+	<img src="Source/pause-48.png" style="display:inline-block; position:absolute; left:40px;top:0px; cursor:pointer; padding:0px;"/></label>
+
+  <input style="position: absolute; top:15px; left: 127px" type="range" name="fps" id="speed" value="25" min="0.1" max="120" />
+
+  <script>
+    // ---------------------------------- ANIMATION VARIABLES --------------------------------------
+    var camera, renderer, scene, controls, light;
+    var fps = 25;                                   // Frame per second (controlled by slider)
+    scene = new THREE.Scene();                      // Initialize Scene
+    renderer = new THREE.WebGLRenderer();           // Initialize renderer
+    var zoom = 20;                                  // Camera zoom amount
+    // Add global variables here -------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------------
+    function initialize() {
+      var WIDTH = window.innerWidth;      // Browser window width
+      var HEIGHT = window.innerHeight;    // Browser window height
+
+      renderer.setSize(WIDTH,HEIGHT);     // Background size
+      renderer.setClearColor(0xFFFFFF);   // Background color (0xFFFFFF corresponds to white)
+      document.body.appendChild(renderer.domElement);
+
+      camera = new THREE.PerspectiveCamera(zoom, WIDTH / HEIGHT);
+      //camera = new THREE.OrthographicCamera(-WIDTH/zoom/3,WIDTH/zoom/3,HEIGHT/zoom/3,-HEIGHT/zoom/3);
+      camera.position.set(0,0,90);
+      scene.add(camera);
+
+      light = new THREE.PointLight(0xFFFFFF); // white light
+      light.position.set(-100, 100, 100);
+      scene.add(light);
+
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+      // Add axis lines for x, y, z
+      var axisLength = 30;
+      addLine([axisLength, 0, 0], [-axisLength, 0, 0], red);    // x-axis
+      addLine([0, axisLength, 0], [0, -axisLength, 0], green);  // y-axis
+      addLine([0, 0, axisLength], [0, 0, -axisLength], blue);   // z-axis
+
+    };
+// --------------------------------------------------------------------------------------------------------
+    function animate() {
+    	// Reads the input speed from the slider
+    	fps = document.getElementById("speed").value;
+    	// Sets the animation frame per second
+      setTimeout( function() { requestAnimationFrame( animate ); }, 1000 / fps );
+      renderer.render(scene, camera);
+      controls.update();
+
+      if(document.getElementById('Play').checked) {
+        // ANIMATION HERE
+        
+      };
+    };
+
+    initialize();
+
+    animate();
+
+  </script>
+
+</body>
+</html>

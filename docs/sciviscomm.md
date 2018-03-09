@@ -30,3 +30,14 @@ Here is the plot in action: [click here](https://kbsezginel.github.io/irmof1dmog
 - Add the html file using *Upload files* button.
 - Edit *_config.yml* file and add your file to the navigation bar. The url should be the same as your html file name. Ex: url for *plot.html* should be *plot*.
 - The plot should be available by clicking the link in the sidebar or through *username*.github.io/*filename*.
+
+### 4. Adding an interactive molecule to the webpage
+- Go to molview: [http://molview.org/](http://molview.org/)
+- Draw any molecule you like or just use the default caffeine
+- If you draw your own molecule click on 2D to 3D after you are done
+- Click Tools -> Embed
+- Copy the HTML code
+- Paste the code to any markdown file
+
+#### Caffeine
+<iframe style="width: 500px; height: 300px;" frameborder="0" src="https://embed.molview.org/v1/?mode=balls"></iframe>

@@ -9,3 +9,5 @@ navigation:
     url: /
   - title: VMD
     url: vmd
+  - title: SciVisComm
+    url: sciviscomm

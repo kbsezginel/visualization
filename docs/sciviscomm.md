@@ -5,9 +5,9 @@ Web Based Interactive Scientific Communication
 ----------------------------------------------
 
 ### 1. Creating a webpage using GitHub pages
-- First create a GitHub account: https://github.com/
-- Go to this link: https://github.com/kbsezginel/gh-pages-template
-- Follow this tutorial: https://kbsezginel.github.io/gh-pages-template/setup
+- First create a GitHub account: [https://github.com/](https://github.com/)
+- Go to this link: [click here](https://github.com/kbsezginel/gh-pages-template)
+- Follow this tutorial: [click here](https://kbsezginel.github.io/gh-pages-template/setup)
 
 ### 2. Interactive plotting with *bokeh*, a Python package
 - Make sure you have Python installed (preferably through Conda)
@@ -21,11 +21,9 @@ conda install bokeh
 pip install bokeh
 ```
 
-Here is a tutorial I made that shows an example of bokeh library for interactive scatter plot:
-https://kbsezginel.github.io/research/conformers-bokeh/
+Here is a tutorial I made that shows an example of bokeh library for interactive scatter plot: [click here](https://kbsezginel.github.io/research/conformers-bokeh/)
 
-Here is the plot in action:
-https://kbsezginel.github.io/irmof1dmog/
+Here is the plot in action: [click here](https://kbsezginel.github.io/irmof1dmog/)
 
 ### 3. Adding the plot to the webpage
 - Go to your GitHub page repository.

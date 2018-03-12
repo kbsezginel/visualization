@@ -82,7 +82,7 @@ March 22, 2018
 .center[<img src="https://silvrback.s3.amazonaws.com/uploads/dbe54ce7-777f-4997-9ea3-7a10b738e3a8/Github%20Header.png" alt="github" height="200" >]
 --
 
-# .center[<div class="font-effect-fire-animation">You got a personal webpage!<div>]
+# .center[<div style="color:#680d0d" class="font-effect-fire-animation">You got a personal webpage!<div>]
 ---
 
 ## 2. Interactive plotting with *bokeh*, a Python package
@@ -168,25 +168,35 @@ from bokeh.embed import file_html
 
 ## 3. Adding the plot to the webpage
 - Go to your GitHub page repository.
-- Add the html file using *Upload files* button.
-- Edit *_config..anaglyphyml* file and add your file to the navigation bar. The url should be the same as your html file name. Ex: url for *plot.html* should be *plot*.
-- The plot should be available by clicking the link in the sidebar or through *username*.github.io/*filename*.
 
+- Add the html file using `Upload files` button.
 
+- Edit `_config.yml` file and add your file to the navigation bar. The url should be the same as your html file name. Ex: url for `plot.html` should be `plot`.
+
+- The plot should be available by clicking the link in the sidebar or through `<username>.github.io/<filename>`.
+
+# .center[<div style="color:#680d0d" class="font-effect-fire-animation">Wowzers!<div>]
 ---
 
 ## 4. Adding an interactive molecule to the webpage
 - Go to molview: [http://molview.org/](http://molview.org/)
+
+.center[<img src="http://blog.molview.org/img/brand.svg" height=100>]
+
 - Draw any molecule you like or just use the default caffeine
-- If you draw your own molecule click on 2D to 3D after you are done
-- Click Tools -> Embed
+
+- If you draw your own molecule click on `2D to 3D` after you are done
+
+- Click `Tools -> Embed`
+
 - Copy the HTML code
+
 - Paste the code to any markdown file
 
 ---
 class: center, middle
 
-# Caffeine
+# .center[<div style="color:#680d0d" class="font-effect-fire-animation">Caffeine<div>]
 <iframe style="width: 500px; height: 300px;" frameborder="0" src="https://embed.molview.org/v1/?mode=balls"></iframe>
 
 More information on adding interactive molecules: [click here](https://kbsezginel.github.io/research/web-molecules/)

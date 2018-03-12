@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Web Based Interactive Scientific Communication
+## Advanced Scientific Visualization and Communication Guest Lecture
+### Kutay B. Sezginel
+March 22, 1018
+
+---
+
+# Outline
+
+1. Creating a web page using GitHub pages
+2. Interactive plotting with bokeh
+3. Adding the plot to the webpage
+4. Adding interactive molecules to the webpage
+
+---
+
+# Introduction
+
+## How do we communicate online?
+--
+
+- Mostly through browsers
+--
+
+- Browsers like html files
+--
+
+- Html files like javascript
+--
+
+- Javascript is interactive and cool
+
+--
+
+## Why web based communication?
+
+--
+- Cross-platform
+- Cross-device
+- Low dependency
+- Interactive
+- Better presentation/visualization
+
+---
+
+## 1. Creating a webpage using GitHub pages
+
+- First create a GitHub account: [https://github.com/](https://github.com/)
+- Go to this link: [click here](https://github.com/kbsezginel/gh-pages-template)
+- Follow this tutorial: [click here](https://kbsezginel.github.io/gh-pages-template/setup)
+
+![github](https://silvrback.s3.amazonaws.com/uploads/dbe54ce7-777f-4997-9ea3-7a10b738e3a8/Github%20Header.png)
+
+---
+
+## 2. Interactive plotting with *bokeh*, a Python package
+
+- Make sure you have Python installed (preferably through Conda)
+- Install matplotlib and bokeh Python packages
+    - If using conda (Miniconda or Anaconda installation):
+```
+conda install bokeh
+```
+    - If using regular Python installation:
+```
+pip install bokeh
+```
+
+Here is a tutorial I made that shows an example of bokeh library for interactive scatter plot: [click here](https://kbsezginel.github.io/research/conformers-bokeh/)
+
+Here is the plot in action: [click here](https://kbsezginel.github.io/irmof1dmog/)
+
+---
+
+## 2. Interactive plotting
+
+### Read data (csv)
+
+```
+import csv
+rows = []
+with open('dmog.csv') as csvfile:
+    reader = csv.reader(csvfile)
+    for row in reader:
+        rows.append(row)
+```
+
+---
+
+## 2. Interactive plotting
+
+### Arrange data
+```
+x_data = [i[1] for i in rows]
+y_data = [i[3] for i in rows]
+```
+
+--
+
+### Plot figure
+```
+from bokeh.plotting import figure, show
+from bokeh.plotting import output_notebook, output_file
+
+p = figure(plot_width=1000, plot_height=600)
+
+p.circle(x_data, y_data)
+show(p)
+output_notebook()
+output_file(toolbar.html)
+```
+
+---
+
+## 2. Interactive plotting
+
+### Customize plot
+```
+p = figure(plot_width=1000, plot_height=600, tools=["pan", "wheel_zoom", "box_zoom", "reset", "tap"], toolbar_location="right", title="IRMOF-1 DMOG Conformers Adsorption)
+```
+
+### Add hover tool
+```
+from bokeh.plotting import figure, output_file, show, ColumnDataSource, output_notebook
+from bokeh.models import HoverTool
+from bokeh.resources import CDN
+from bokeh.embed import file_html
+```
+
+---
+
+## 3. Adding the plot to the webpage
+- Go to your GitHub page repository.
+- Add the html file using *Upload files* button.
+- Edit *_config.yml* file and add your file to the navigation bar. The url should be the same as your html file name. Ex: url for *plot.html* should be *plot*.
+- The plot should be available by clicking the link in the sidebar or through *username*.github.io/*filename*.
+
+
+---
+
+## 4. Adding an interactive molecule to the webpage
+- Go to molview: [http://molview.org/](http://molview.org/)
+- Draw any molecule you like or just use the default caffeine
+- If you draw your own molecule click on 2D to 3D after you are done
+- Click Tools -> Embed
+- Copy the HTML code
+- Paste the code to any markdown file
+
+---
+class: center, middle
+
+# Caffeine
+<iframe style="width: 500px; height: 300px;" frameborder="0" src="https://embed.molview.org/v1/?mode=balls"></iframe>
+
+More information on adding interactive molecules: [click here](https://kbsezginel.github.io/research/web-molecules/)
+
+---
+class: center, middle
+
+# Thank you
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>

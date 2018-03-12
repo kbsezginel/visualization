@@ -7,6 +7,10 @@ navigation:
     url: http://kbsezginel.github.io
   - title: Visualization
     url: /
+  - title: Presentation
+    url: presentation
+  - title: Web Molecular Dynamics (three.js)
+    url: web-md
   - title: VMD
     url: vmd
   - title: SciVisComm

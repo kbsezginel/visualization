@@ -17,6 +17,23 @@
       .red { color: #ad1d1d; }
       .gray {color: #606060; }
       .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .column:first-of-type {float:left; text-align: center;}
+      .column:last-of-type {float:right; text-align: center;}
+
+      .col31 {width: 33%; text-align: center; float:left}
+      .col32 {width: 33%; text-align: center; float:left}
+      .col33 {width: 33%; text-align: center; float:left}
+
+      .split-30 .column:first-of-type {width: 30%}
+      .split-30 .column:last-of-type {width: 70%}
+      .split-40 .column:first-of-type {width: 40%}
+      .split-40 .column:last-of-type {width: 60%}
+      .split-50 .column:first-of-type {width: 50%}
+      .split-50 .column:last-of-type {width: 50%}
+      .split-60 .column:first-of-type {width: 60%}
+      .split-60 .column:last-of-type {width: 40%}
+      .split-70 .column:first-of-type {width: 70%}
+      .split-70 .column:last-of-type {width: 30%}
     </style>
   </head>
   <body>
@@ -107,11 +124,31 @@ Clone the webpage template:
 
 ## 2. Interactive plotting with .red[*bokeh*], a Python package
 
-### Find the downloaded data
+### Metal-organic frameworks as drug encapsulators
 
-### Start Jupyter Notebook
-First we need to read the data
+.col31[<img src="assets/img/mof-assembly.svg" alt="github" height=130>]
+--
+.col32[<img src="assets/img/mof-drug-delivery.png" alt="github" height=150>]
+--
+.col33[<img src="assets/img/pza-histogram.png" alt="github" height=150>]
+
+Pyrazinamide is a medication used to treat tuberculosis
+--
+
+### Objective
+- Collaborators want to see which MOF they can synthesize
+- Make an interactive plot to show PZA uptake and properties of each MOF
+
 ---
+
+### .red[Start Jupyter Notebook]
+- Windows: Start Anaconda prompt
+- Mac/Linux: Start terminal
+```python
+jupyter notebook
+```
+--
+
 ### .red[Read data (csv)]
 
 ```python
@@ -123,7 +160,7 @@ with open('pza-uptake.csv') as csvfile:
     for row in reader:
         rows.append(row)
 ```
---
+---
 
 ### .red[Arrange data]
 ```python
@@ -135,7 +172,7 @@ headers = ['mof', 'metal', 'pza', 'err', 'vp', 'vf', 'ro', 'sa', 'dia']
 data = {h: [i[idx] for i in rows[1:]] for idx, h in enumerate(headers)}
 ```
 
----
+--
 ### .red[Plot data]
 ```python
 from bokeh.plotting import figure, show
@@ -149,7 +186,7 @@ output_notebook()
 
 --
 
-# .center[<div style="color:#680d0d" class="font-effect-fire-animation">Wowzers!<div>]
+# .center[<div style="color:#680d0d" class="font-effect-fire-animation">Amazing!<div>]
 
 ---
 ### .red[Customize figure]
@@ -304,7 +341,7 @@ with open('pza.html', 'w') as html_file:
 ---
 class: center, middle
 
-# .center[<div style="color:#680d0d" class="font-effect-fire-animation">Wowzers!<div>]
+# .center[<div style="color:#680d0d" class="font-effect-fire-animation">Amazing!<div>]
 
 ---
 

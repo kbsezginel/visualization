@@ -30,19 +30,33 @@ class: center, middle
 March 22, 2018
 
 ---
-
 # Outline
 
-1. Creating a web page using GitHub pages
-2. Interactive plotting with bokeh
-3. Adding the plot to the webpage
-4. Adding interactive molecules to the webpage
+#### 1. Creating a web page using GitHub pages
+#### 2. Interactive plotting with bokeh Python library
+#### 3. Adding the interactive plot to your webpage
+#### 4. Adding interactive molecules to your webpage
 
---
+---
+## Requirements
 
-## .red[Homework]
-- Make an interactive plot and upload to your web page
-- Due: April 2018
+### 1. Get a GitHub account
+- Register for a GitHub account: [https://github.com/](https://github.com/)
+
+### 2. Install .red["bokeh"] Python library
+- Make sure you have Python installed (preferably through Conda)
+- Install bokeh Python library [Bokeh user guide](https://bokeh.pydata.org/en/latest/docs/user_guide.html#userguide)
+    - If using conda (Miniconda or Anaconda installation):
+```
+conda install bokeh
+```
+    - If using regular Python installation:
+```
+pip install bokeh
+```
+
+### 3. Data for the plot: [click here to download](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/kbsezginel/visualization/tree/master/sciviscomm)
+
 ---
 
 # Introduction
@@ -72,41 +86,29 @@ March 22, 2018
 - Interactive
 - Better presentation/visualization
 
+???
+Wowzers
+
 ---
 
 ## 1. Creating a webpage using GitHub pages
 
-- First create a GitHub account: [https://github.com/](https://github.com/)
+Clone the webpage template:
 - Go to this link: [click here](https://github.com/kbsezginel/gh-pages-template)
 - Follow this tutorial: [click here](https://kbsezginel.github.io/gh-pages-template/setup)
 
 .center[<img src="https://silvrback.s3.amazonaws.com/uploads/dbe54ce7-777f-4997-9ea3-7a10b738e3a8/Github%20Header.png" alt="github" height="200" >]
 --
 
-# .center[<div style="color:#680d0d" class="font-effect-fire-animation">You got a personal webpage!<div>]
+# .center[<div style="color:#680d0d" class="font-effect-fire-animation">You have a personal webpage!<div>]
 ---
 
 ## 2. Interactive plotting with .red[*bokeh*], a Python package
 
-### .red[Installation]
-- Make sure you have Python installed (preferably through Conda)
-- Install matplotlib and bokeh Python packages
-    - If using conda (Miniconda or Anaconda installation):
-```
-conda install bokeh
-```
-    - If using regular Python installation:
-```
-pip install bokeh
-```
-- Download images [here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/kbsezginel/visualization/tree/master/sciviscomm/img)
+### Find the downloaded data
 
-### .red[Additional resources]
-
-Here is a tutorial I made that shows an example of bokeh library for interactive scatter plot: [click here](https://kbsezginel.github.io/research/conformers-bokeh/)
-
-Here is the plot in action: [click here](https://kbsezginel.github.io/irmof1dmog/)
-
+### Start Jupyter Notebook
+First we need to read the data
 ---
 ### .red[Read data (csv)]
 

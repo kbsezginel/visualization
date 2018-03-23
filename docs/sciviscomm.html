@@ -75,6 +75,27 @@ pip install bokeh
 ### 3. Download the data for the plot: [click here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/kbsezginel/visualization/tree/master/sciviscomm/data)
 
 ---
+## Assignment
+
+#### Plot Isoniazid uptake vs pore volume and upload to your webpage
+#### .red[Due: April 4, 2018 by 11:59 pm]
+
+You have a new set of 50 MOFs with [Isoniazid](https://en.wikipedia.org/wiki/Isoniazid) uptake and additional properties for each MOF.
+Plot pore volume vs uptake using a bokeh circle plot.
+Add hover tool with MOF images, name of the MOF, name of the metal atom and at least one property of your choice.
+Add the new MOF images and the plot to your webpage.
+Submit a link to the webpage.
+
+The data is formatted the same way as the data we used in class.
+However the csv file has a different name and the folder name is `assignment` instead of `data`.
+Make sure you make appropriate changes in your code to account for these differences.
+You don't need to delete the files you already uploaded to the webpage.
+Just upload the html file with a new name and add the new images to `assets/img/mofs`.
+
+
+#### Download data: [click here](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/kbsezginel/visualization/tree/master/sciviscomm/assignment)
+#### Contact me if you have any questions: kbs37@pitt.edu]
+---
 
 # Introduction
 
@@ -150,13 +171,14 @@ jupyter notebook
 --
 
 ### .red[Read data (csv)]
-#### .gray[Make sure to copy downloaded data to current directory]
+#### .gray[Make sure to copy downloaded data folder to current directory]
 ```python
-import csv
+import os, csv
 
 rows = []
-with open('pza-uptake.csv') as csvfile:
-    reader = csv.reader(csvfile)
+csvfile = os.path.join('data', 'pza-uptake.csv')
+with open(csvfile) as fileobj:
+    reader = csv.reader(fileobj)
     for row in reader:
         rows.append(row)
 ```
@@ -170,6 +192,11 @@ headers = ['mof', 'metal', 'pza', 'err', 'vp', 'vf', 'ro', 'sa', 'dia']
 # Create a dictionary where each header is assigned to all column values
 # This syntax uses dictionary and list comprehensions
 data = {h: [i[idx] for i in rows[1:]] for idx, h in enumerate(headers)}
+
+# Convert numerical values to float (csvreader reads as string by default)
+keys = ['pza', 'err', 'vp', 'vf', 'ro', 'sa', 'dia']
+for k in keys:
+    data[k] = [float(i) for i in data[k]]
 ```
 
 --
@@ -183,10 +210,6 @@ p.circle(data['vp'], data['pza'])
 show(p)
 output_notebook()
 ```
-
---
-
-# .center[<div style="color:#680d0d" class="font-effect-fire-animation">Amazing!<div>]
 
 ---
 ### .red[Customize figure]
@@ -218,10 +241,16 @@ p.circle(data['vp'], data['pza'],
 ```python
 import os
 
-img_dir = ''
+# For viewing the plot locally on your computer
+img_dir = os.path.join('data', 'mofs')
 data['images'] = [os.path.join(img_dir, '%s.svg' % i) for i in data['mof']]
+
+# For viewing plot in the webpage
+img_dir = 'assets/img/mofs'
+data['images'] = ['%s/%s.svg' % (img_dir, i) for i in data['mof']]
 ```
---
+---
+### .red[Hover tool]
 
 #### .gray[Create hover tool]
 ```python
@@ -266,7 +295,7 @@ p.circle('vp', 'pza',
          line_color="darkred")
 
 # We need to save to html file to make the images visible
-output_file('test.html')
+output_file('pza.html')
 ```
 
 ---
@@ -325,7 +354,7 @@ p.ygrid.grid_line_alpha = 0.2
 p.xgrid.grid_line_color = None
 
 # We need to save to html file to make the images visible
-output_file('test.html')
+output_file('pza.html')
 ```
 --
 
@@ -372,7 +401,7 @@ class: center, middle
 
 - Copy the HTML code
 
-- Paste the code to any markdown file
+- Paste the code to any markdown or html file
 
 ---
 class: center, middle

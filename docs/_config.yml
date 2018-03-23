@@ -7,6 +7,8 @@ navigation:
     url: http://kbsezginel.github.io
   - title: Visualization
     url: /
+  - title: Portfolio
+    url: portfolio
   - title: Presentation
     url: presentation
   - title: Web Molecular Dynamics (three.js)

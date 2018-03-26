@@ -5,8 +5,6 @@ Cross-platform, markdown presentations using html and javacript.
 
 Unlike PowerPoint, there's no need to download anything.
 
-You can
-
 Remark.js
 ----------
 
@@ -49,3 +47,7 @@ Slides is a suite of modern presentation tools, available right from your browse
 #### Disadvantages
 - Not free
 - Free membership only gives public presentation option
+
+My Presentations
+----------------
+- [WilmerLab Group Meeting - March 26, 2018](wlab-gm-march26-2018)

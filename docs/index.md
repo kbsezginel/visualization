@@ -11,6 +11,7 @@ Scientific Communication
 -   [Non-linear axes](https://github.com/kbsezginel/visualization/blob/master/matplotlib-plots/nonlinear_axis.ipynb)
 -   [Regression with numpy](https://github.com/kbsezginel/visualization/blob/master/matplotlib-plots/regression.ipynb)
 -   [iPython Widgets](https://github.com/kbsezginel/visualization/blob/master/matplotlib-plots/interactive_widgets_DLA.ipynb)
+-   [Code snippets](/visualization/matplotlib-snippets)
 
 ### Matplotlib Animations
 
@@ -35,7 +36,7 @@ animated 3D computer graphics in a web browser. [Here](https://github.com/kbsezg
 is an example to visualize molecules using this library in a browser.
 
 Three.js live examples:
--   [Basic Molecular Dynamics](/web-md)
+-   [Basic Molecular Dynamics](/visualization/web-md)
 
 Three.js examples:
 -   [Molecular visualizer](https://github.com/kbsezginel/visualization/tree/master/three-js/atomVis)

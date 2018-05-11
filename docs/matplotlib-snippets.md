@@ -15,6 +15,7 @@ You can just change the functionthat you use to plot your data without changing 
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 def subplot(plot_fun, plot_data, plot_args={}, nrow=1, width=3, height=3, dpi=200, save=None, title=None):
     n_plots = len(plot_data)
     ncol = np.ceil(n_plots / nrow)
@@ -34,7 +35,7 @@ Here the `plot_fun` is your function that will be used to plot your data, `plot_
 that will be fed to your plot function and `plot_args` is a dictionary to be used as kwargs for your plot function.
 Here is an example for a scatter plot:
 
-```
+```python
 def scatter_plot(data, ax, markersize=100):
     ax.scatter(data['x'], data['y'], markersize=markersize)
 ```
@@ -43,9 +44,16 @@ Here our `scatter_plot` function takes a dictionary with `x` and `y` keys as inp
 the subplot function and a `markersize` kwarg to set marker size.
 Here is an example for using these functions together:
 
-```
+```python
 plot_data = [dict(x=np.arange(10), y=np.random.random_sample(10)),
              dict(x=np.arange(20), y=np.random.random_sample(20))]
              
 subplot(scatter_plot, plot_data, dict(markersize=50))
 ```
+
+Subplot function arguments:
+- nrow (int): Number of rows
+- width (float): The width of each plot in the subplot
+- height (float): The height of each plot in the subpot
+- dpi (int): Plot resolution (dots per inch)
+- title (list): List of titles for each plot in the subplot 

@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def subplot(plot_fun, plot_args, nrow=1, width=3, height=3, dpi=200, save=None):
+def subplot(plot_fun, plot_args, nrow=1, width=4, height=3, dpi=200, save=None):
     n_plots = len(plot_args)
     ncol = np.ceil(n_plots / nrow)
     figsize = (ncol * width, nrow * height)

@@ -26,6 +26,9 @@ More matplotlib examples:
 -   [Scipy matplotlib lecture](http://www.scipy-lectures.org/intro/matplotlib/matplotlib.html)
 -   [Matplotlib official examples](http://matplotlib.org/examples/index.html)
 
+### [Bokeh Interactive Plots](/visualization/bokeh)
+
+
 Molecular visualization
 -----------------------
 

@@ -1,6 +1,15 @@
 Matplotlib Code snippets
 =========================
 
+Colors
+------
+
+```python
+# 1: blue | 2: red | 3: green | 4: yellow
+colors = {1: '#4e7fad', 2: '#CF5955', 3: '#66AD9B', 4: '#EAC658'}
+shades = {1: '#3B4C5C', 2: '#672C2A', 3: '#33564D', 4: '#75632C'}
+```
+
 Subplot
 --------
 A subplot example where a list of data is and a plot function is used to generate a grid of plots.
@@ -45,7 +54,7 @@ Here is an example for using these functions together:
 ```python
 plot_data = [dict(x=np.arange(10), y=np.random.random_sample(10), markersize=75),
              dict(x=np.arange(20), y=np.random.random_sample(20), markersize=150)]
-             
+
 subplot(scatter_plot, plot_data)
 ```
 

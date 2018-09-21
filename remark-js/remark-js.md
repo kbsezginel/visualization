@@ -13,6 +13,9 @@ These are some of my favorites:
 Some usage information:
 - [Getting started with Google fonts](https://developers.google.com/fonts/docs/getting_started)
 
+### Formulas using MathJax
+See [here](https://github.com/gnab/remark/wiki/LaTeX-using-MathJax).
+
 ## Images
 
 ## Videos

@@ -60,6 +60,13 @@ Audio visualization
 - [Blender 3D Circular Audio Visualizer Tutorial by AnonXmous](https://www.youtube.com/watch?v=8NTvv_Y6zr0)
 - [GXAudioVisualisation GitHub Repository](https://github.com/gethiox/GXAudioVisualisation)
 
+#### GXAudioVisualisation
+
+**Assinging materials to all objects:**
+- Select an object and create new material
+- Select all other objects and select the first object with the material last
+- Press Ctrl + L and select materials from the window
+
 Installation
 ------------
 

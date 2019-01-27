@@ -1,5 +1,9 @@
 # Visualization Tools
 
+## Tips
+
+- [Your Friendly Guide to Colors in Data Visualisation](https://lisacharlotterost.github.io/2016/04/22/Colors-for-DataVis/)
+
 ## Matplotlib Plotting Examples
 
 -   [2D Histogram](https://github.com/kbsezginel/visualization/blob/master/matplotlib-plots/2D_histogram.ipynb)
@@ -42,4 +46,4 @@ An example VMD visualization state for generating movies.
 ## ffmpeg
 Download [here](https://ffmpeg.org/)
 
-Installation insctructions [here](https://github.com/adaptlearning/adapt_authoring/wiki/Installing-FFmpeg)
+Installation instructions [here](https://github.com/adaptlearning/adapt_authoring/wiki/Installing-FFmpeg)
